@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Flight Details</h1>
+        <section id="flight-details">
+            <div>Airline: <%= flight.airline %> </div>
+            <div>Airport: <%= flight.airport %> </div>
+            <div>Flight Number: <%= flight.flightNo %> </div>
+            <div>Departs: <%= flight.departs %> </div>
+        </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Seat</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tickets.forEach(function(t) { %>
+                    <tr>
+                        <td><%= t.seat %></td>
+                        <td>$<%= t.price %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href = '/flights/<%= flight._id %>/tickets/new' ><button>New Ticket</button></a>
+
+        <h2>Destinations</h2>
+        <% if (flight.destinations.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Arrival Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% flight.destinations.forEach(function(d) { %>
+                     <tr>
+                        <td><%= d.airport %> </td>
+                        <td><%= d.arrival %> </td>
+                        <td><form action="/destinations/<%= d._id%>?_method=DELETE"
+                            class = 'delete-form' method="POST">
+                                <button type="submit">X</button>
+                            </form>
+                        </td>
+                            
+                     </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+             <h5>Info Not Available. Please Try Again Later.</h5>
+        <% } %>
+        </br> <h3>Add Destination</h3>
+        <form id="add-dest-form" method="POST"
+            action="/flights/<%= flight._id %>/destinations">
+            <label>Airport:
+                <select name="airport">
+                    <option value="AUS">AUS</option>
+                    <option value="DFW">DFW</option>
+                    <option value="DEN">DEN</option>
+                    <option value="LAX">LAX</option>
+                    <option value="SAN">SAN</option>
+                </select>
+            </label>
+            <label>Arrival:
+                <input type="datetime-local" name="arrival">
+            </label></br>
+            <button type="submit">Update Destinations</button>
+        </form>        
+</body>
+</html>
