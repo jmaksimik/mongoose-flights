@@ -30,9 +30,8 @@ const flightSchema = new Schema({
         default: function () {
             let currentDay = new Date();
             let yearLater = currentDay.setFullYear(currentDay.getFullYear() + 1);
-            return yearLater.toString();
+            return yearLater.toString().slice(0, 16);
 
-            // return new Date().toISOString().slice(0, 16);
         }
     },
     destinations: [destinationSchema]

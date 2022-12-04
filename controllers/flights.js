@@ -10,7 +10,8 @@ module.exports = {
 
 function show(req, res){
     Flight.findById(req.params.id, function(err, flightDoc){
-        console.log(flightDoc)
+        //console.log(flightDoc)
+        console.log(flightDoc.destinations)
         flightDoc.destinations.sort(function (a, b){
             return new Date(a.arrival) - new Date(b.arrival)
         }); 
@@ -38,12 +39,15 @@ function create(req, res){
 }
 
 function newFlight(req, res){
-    res.render('flights/new');
+    const newFlight = new Flight();
+    const dt = newFlight.departs;
+    const departsDate = dt.toISOString().slice(0, 16);
+
+    res.render('flights/new', {departsDate});
 }
 
 function index(req, res){    
     Flight.find({}, function(err, flightDocs){
-        // console.log(flightDocs);
         res.render('flights/index', {flights: flightDocs});
     });
 };

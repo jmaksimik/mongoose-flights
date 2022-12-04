@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <nav>
-        <a href="/flights">ALL FLIGHTS</a>
-        <a href="/flights/new">ADD FLIGHTS</a>
-    </nav>
+<%- include('../partials/header') %>
+
     <h1>New Flight</h1>
     <div id="grid">
         <form action="/flights" method="POST">
@@ -36,7 +24,8 @@
                 <input type="text" name="flightNo">
             </label></br>
             <label>Departs:
-                <input type="datetime-local" name="departs">
+                <input type="datetime-local" name="departs"
+                    value = <%= departsDate %>>
             </label></br>
             <button type="submit">Save Flight</button>
         </form>
