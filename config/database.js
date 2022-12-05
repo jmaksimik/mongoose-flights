@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/flights', {
+mongoose.connect('mongodb://localhost/finalFlights', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
